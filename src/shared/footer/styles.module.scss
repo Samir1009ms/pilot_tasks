@@ -1,0 +1,12 @@
+@import '../../styles/mixin';
+@import '../../styles/colors';
+@import '../../styles/variables';
+
+.footer {
+    width: 100%;
+    height: 40px;
+    background-color: $color-purple;
+    @include flex-center;
+    color: $color-white;
+    font-size: $medium;
+}

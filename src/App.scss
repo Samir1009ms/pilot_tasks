@@ -1,0 +1,11 @@
+@import "styles/colors";
+@import "styles/reset";
+@import "styles/typography";
+@import "styles/mixin";
+@import "styles/root";
+
+.tabulator-tableholder {
+  max-height: 400px !important;
+  min-height: 400px !important;
+  overflow-y: auto;
+}
