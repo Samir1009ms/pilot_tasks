@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { ReactTabulator } from "react-tabulator";
 import { status, setModal, setWTK, len } from "../../store/expense/file-slice";
@@ -13,7 +13,6 @@ import BarCharts from '../charts/BarCharts';
 import PieCharts from '../charts/PieCharts';
 import { IData, ITableData } from '../../model/Model';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
-import { set } from 'ol/transform';
 import Addmodal from '../modal/Addmodal';
 
 const Table: React.FC = () => {
@@ -202,7 +201,6 @@ const Table: React.FC = () => {
             })
         );
     };
-    const tableRef = useRef<any>(undefined);
     // ****** table filter silmek ucun yeniden qurmaq ucundur ****** // 
     // const [tableKey, setTableKey] = useState(Date.now());
     function filterDelete() {
@@ -215,7 +213,6 @@ const Table: React.FC = () => {
             <ReactTabulator
                 data={state}
                 // key={tableKey}
-                ref={tableRef}
                 columns={columns}
                 layout={"fitColumns"}
                 pagination={"local"}
