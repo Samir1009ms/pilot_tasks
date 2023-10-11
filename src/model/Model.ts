@@ -5,5 +5,5 @@ export interface IData {
     len: number
     wkt: string
     status: number
-    geoType: string
+    geoType?: string
 }

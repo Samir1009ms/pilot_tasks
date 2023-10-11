@@ -5,7 +5,8 @@ const File = createSlice({
     name: 'file',
     initialState: {
         tableData: [],
-        chartData: null || {},
+        chartDataStatus: null || {},
+        chartDataLen: null || {},
         modal: false,
         wkt: '',
     },
@@ -21,13 +22,22 @@ const File = createSlice({
             state.modal = action.payload
         },
         status: (state, action) => {
-            state.chartData = action.payload
+            state.chartDataStatus = action.payload
+        },
+        len: (state, action) => {
+            state.chartDataLen = action.payload
         },
         setWTK: (state, action) => {
             state.wkt = action.payload
+        },
+        addData(state: any, action: { payload: any }) {
+            const data = state.tableData
+            data.push(action.payload)
+            data.sort((a: any, b: any) => b.id - a.id)
+            state.tableData = data
         }
     },
 })
 
-export const { setFile, setModal, status, setWTK } = File.actions;
+export const { setFile, setModal, status, setWTK, addData, len } = File.actions;
 export default File.reducer;

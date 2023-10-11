@@ -1,34 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import s from './styles.module.scss'
 import { Modal, Select } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { addData, setModal } from "../../store/expense/file-slice";
+const Addmodal: React.FC<any> = ({ id }) => {
+    const modal = useSelector((state: any) => state.FileSlice.modal)
+    // const [isModalOpen, setIsModalOpen] = useState(false);
+    const dispatch = useDispatch()
 
-const Qeydmodal: React.FC<any> = ({ onDataSubmit, modalStatus, editModalClose, editData }) => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const handleOk = (e: any) => {
-        onDataSubmit({ len, status }, false);
         setLen('');
         setStatus(0);
-        setIsModalOpen(false)
+        setWkt('LINESTRING(50.32489718460863 40.3897112495751,50.32500619720577 40.39007045577375)');
+        dispatch(addData({ id, len, wkt, status, geoType: wkt.split("(")[0] }))
+        dispatch(setModal(false))
     };
 
-    const [len, setLen] = useState<any>();
-    const [status, setStatus] = useState<any>();
+    const [len, setLen] = useState<string>('');
+    const [status, setStatus] = useState<number>(0);
+    const [wkt, setWkt] = useState<string>('LINESTRING(50.32489718460863 40.3897112495751,50.32500619720577 40.39007045577375)');
+
     const handleCancel = () => {
-        setIsModalOpen(false)
-        editModalClose(false)
+        dispatch(setModal(false))
     };
     const handleChange = (value: number) => {
         setStatus(value)
     };
     useEffect(() => {
-        setIsModalOpen(modalStatus)
-        setLen(editData.len)
-        setStatus(editData.status)
-    }, [modalStatus, editData])
-
+    }, [modal])
     return (
         <section >
-            <Modal title="Başlıq" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+            <Modal title="Başlıq" open={modal} onOk={handleOk} onCancel={handleCancel}>
                 <div className={`${s.modal}`}>
                     <div className={`${s.modal__container}`}>
                         <label htmlFor="lenData" className={`${s.modal__container_text}`}>Len təyin et</label>
@@ -41,9 +43,20 @@ const Qeydmodal: React.FC<any> = ({ onDataSubmit, modalStatus, editModalClose, e
                         />
                     </div>
                     <div className={`${s.modal__container}`}>
+                        <label htmlFor="WKT" className={`${s.modal__container_text}`}>WKT təyin et</label>
+                        <small>geo type gore error verirdi statik deyer verdim </small>
+                        <input
+                            type="text"
+                            id="wktData"
+                            value={wkt}
+                            onChange={(e) => setWkt(e.target.value)}
+                            className={`${s.modal__container_values}`}
+                        />
+                    </div>
+                    <div className={`${s.modal__container}`}>
                         <label htmlFor="statusData" className={`${s.modal__container_text}`}>Status təyin et</label>
                         <Select
-                            defaultValue={status}
+                            defaultValue={0}
                             value={status}
                             style={{ width: '100%' }}
                             className={`${s.modal__container_values}`}
@@ -62,4 +75,4 @@ const Qeydmodal: React.FC<any> = ({ onDataSubmit, modalStatus, editModalClose, e
     )
 }
 
-export default Qeydmodal;
+export default Addmodal;

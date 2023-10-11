@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 const PieCharts: React.FC = () => {
     const chartRef = useRef<HTMLCanvasElement | null>(null);
     const chartInstance = useRef<any>(null);
-    const chartData = useSelector((state: any) => state.FileSlice.chartData);
+    const chartData = useSelector((state: any) => state.FileSlice.chartDataStatus);
 
     useEffect(() => {
         const ctx = chartRef.current?.getContext('2d');

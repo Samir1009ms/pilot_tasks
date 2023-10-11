@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 const BarCharts: React.FC = () => {
     const chartRef = useRef<HTMLCanvasElement | null>(null);
     const chartInstance = useRef<Chart | null>(null);
-    const chartData = useSelector((state: any) => state.FileSlice.chartData);
+    const chartData = useSelector((state: any) => state.FileSlice.chartDataLen);
 
     useEffect(() => {
         const ctx = chartRef.current?.getContext('2d');
